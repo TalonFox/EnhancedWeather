@@ -17,6 +17,8 @@ public class EnhancedWeatherConfigModel {
     //@Comment("Changes the radius of clouds that are rendered\n(Default: 9)")
     @RangeConstraint(min=6,max=16)
     public int Client_CloudRadius = 9;
+    //@Comment("How much the wind will blow most particles (Except Cherry leaves, which always blow with the wind)\n(Default: 0.05)")
+    public float Client_WindParticleInfluence = 0.05F;
 
     @SectionHeader("weather")
     @Sync(value=Option.SyncMode.OVERRIDE_CLIENT)

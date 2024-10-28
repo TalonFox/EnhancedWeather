@@ -36,11 +36,12 @@ public class MixinParticle {
     protected double velocityZ;
     @Inject(at = @At("TAIL"), method = "tick")
     private void applyWind(CallbackInfo ci) {
-        if(EnhancedWeather.CONFIG.Misc_DimensionWhitelist().contains(world.getDimensionKey().getValue().toString())) {
+        if(EnhancedWeather.CONFIG.Client_WindParticleInfluence() > 0F && EnhancedWeather.CONFIG.Misc_DimensionWhitelist().contains(world.getDimensionKey().getValue().toString())) {
             if (collidesWithWorld) {
                 if(world.getTopPosition(Heightmap.Type.MOTION_BLOCKING,new BlockPos((int)Math.floor(prevPosX),(int)Math.floor(prevPosY),(int)Math.floor(prevPosZ))).getY() <= prevPosY) {
-                    velocityX = EnhancedWeatherClient.windX/4F;
-                    velocityZ = EnhancedWeatherClient.windZ/4F;
+                    float f = EnhancedWeather.CONFIG.Client_WindParticleInfluence();
+                    velocityX = EnhancedWeatherClient.windX * f;
+                    velocityZ = EnhancedWeatherClient.windZ * f;
                 }
             }
         }
